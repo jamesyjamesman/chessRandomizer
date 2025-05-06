@@ -1,4 +1,5 @@
 import random
+import os
 
 def main():
     while True:
@@ -46,15 +47,15 @@ def randomize_board():
         n += 1
     return
 
+# Generates a random piece, weighted by the initial piece frequency
 def piece_picker():
     print("Weighted by initial piece frequency.")
     while True:
         pieces = ["pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "knight", "knight",
                                   "bishop", "bishop", "king", "queen", "rook", "rook"]
-        option = input("enter 'exit' to exit. enter anything else to generate a new piece.")
+        option = input("enter 'exit' to exit. enter anything else to generate a new piece.\n")
         if option == "exit":
             return
         else:
             print(random.choice(pieces))
-
 main()
