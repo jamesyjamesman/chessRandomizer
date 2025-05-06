@@ -49,10 +49,13 @@ def randomize_board():
 
 # Generates a random piece, weighted by the initial piece frequency
 def piece_picker():
+    if_pawn = input("Would you like to change one pawn into a wildcard?")
     print("Weighted by initial piece frequency.")
-    while True:
-        pieces = ["pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "knight", "knight",
+    pieces = ["pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "knight", "knight",
                                   "bishop", "bishop", "king", "queen", "rook", "rook"]
+    if if_pawn == "yes" or "y":
+        pieces[0] = "any piece"
+    while True:
         option = input("enter 'exit' to exit. enter anything else to generate a new piece.\n")
         if option == "exit":
             return
