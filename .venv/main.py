@@ -4,7 +4,7 @@ import os
 def main():
     while True:
         try:
-            choice = int(input("0: exit, 1: randomize board, 2: piece picker\n"))
+            choice = int(input("0: exit, 1: randomize board, 2: piece picker, 3: randomize sides\n"))
         except:
             print("Please enter an integer!")
             continue
@@ -14,6 +14,8 @@ def main():
             randomize_board()
         elif choice == 2:
             piece_picker()
+        elif choice == 3:
+            randomize_sides()
         else:
             print("Invalid option!")
 
@@ -61,4 +63,49 @@ def piece_picker():
             return
         else:
             print(random.choice(pieces))
+
+def randomize_sides():
+    remaining_white_pieces = ["pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "knight", "knight",
+                              "bishop", "bishop", "king", "queen", "rook", "rook"]
+    remaining_black_pieces = ["pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "knight", "knight",
+                              "bishop", "bishop", "king", "queen", "rook", "rook"]
+    letters = ["a", "b", "c", "d", "e", "f", "g", "h"]
+    used_white_numbers = []
+    used_black_numbers = []
+
+    color = None
+    n = 0
+    while n < 32:
+        if n % 2 == 0:
+            while True:
+                random_num = random.randint(0, 15)
+                if random_num not in used_white_numbers:
+                    used_white_numbers.append(random_num)
+                    file = random_num // 8
+                    rank = letters[random_num % 8]
+                    file += 1
+                    break
+            color = "white"
+            piece = random.choice(remaining_white_pieces)
+            remaining_white_pieces.remove(piece)
+            print(f"{color} {piece} to {rank}{file}")
+        else:
+            while True:
+                random_num = random.randint(0, 15)
+                if random_num not in used_black_numbers:
+                    used_black_numbers.append(random_num)
+                    file = random_num // 8
+                    rank = letters[random_num % 8]
+                    file += 1
+                    break
+            color = "black"
+            file += 6
+            piece = random.choice(remaining_black_pieces)
+            remaining_black_pieces.remove(piece)
+            print(f"{color} {piece} to {rank}{file}")
+        n += 1
+
+
+
+
 main()
